@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+@keyframes move {
+    from {
+        background: red;
+        left: 0;
+    }
+    50%{
+        background: yellow;
+        left: 100px;
+    }
+    100% {
+        background: blue;
+        left: 200px;
+    }
+}
+.wrap {
+    position: relative;
+    width:500px;
+    height:140px;
+    background:url(./images/key.jpg) no-repeat 0 bottom;
+    margin-bottom: 50px;
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    position: absolute;
+}
+.step-1 {
+    animation: move 2s steps(1, start) infinite;
+}
+.step-2 {
+    animation: move 2s steps(1, end) infinite;
+}
+.step-3 {
+    animation: move 2s steps(3, end) infinite;
+}
+</style>
+<body>
+<!--
+从上面可以看到，设置了steps(1, start)的正方形的颜色变化是黄色与蓝色相互切换,跳过了红色，因为阶跃点是start，也就是0s时已经是50%的状态了，因此直接显示黄色
+而设置了step-end的正方形的颜色变化是红色色与黄色相互切换,阶跃点是end，最后没有到蓝色-->
+<div class="wrap">
+    <div class="circle step-1"></div>
+</div>
+<div class="wrap">
+    <div class="circle step-2"></div>
+</div>
+
+<!--有两次动画跳跃0%-50%和50%-100%。每次动画“跳跃”的时候，对steps(1)来说，
+0%到50%有且只会变化一次，50%到100%也是只变化一次；
+而对steps(3)来说，从0%到50%会变化3次，从50%到100%也会变化3次-->
+<div class="wrap">
+    <div class="circle step-3"></div>
+</div>
+</body>
+</html>
